@@ -2,3 +2,6 @@
 project.nuget.cache
 obj/
 bin/
+moviebox-frontend/node_modules/
+moviebox-frontend/dist/
+node_modules

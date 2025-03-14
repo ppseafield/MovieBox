@@ -1,10 +1,12 @@
 using Microsoft.OpenApi.Models;
 using MovieBox.DB;
 using MovieBox.OMDb;
+using MovieBox.Types;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 await using var db = new MovieReviewContext();
 
@@ -41,19 +43,23 @@ if (string.IsNullOrEmpty(omdbApiKey)) {
 
 app.MapGet("/", () => "Hello World!");
 
-app.MapGet("/movies/search", async (HttpContext context, string title) => {
-  var response = await client.GetAsync($"http://www.omdbapi.com/?apikey={omdbApiKey}&s={title}");
-  if (response == null) {
-    return "No movies found.";
-  } else {
-    context.Response.Headers["Content-Type"] = "application/json";
-    return await response.Content.ReadAsStringAsync();
-  }
+
+
+app.MapGet("/api/movies/search", async (HttpContext context, string title) => {
+  Console.WriteLine($"Searching for {title}");
+  var response = await client.GetFromJsonAsync<OmdbSearch>($"http://www.omdbapi.com/?apikey={omdbApiKey}&s={title}");
+  // var response = await client.GetStringAsync($"http://www.omdbapi.com/?apikey={omdbApiKey}&s={title}");
+  
+  response.Search.ForEach(Console.WriteLine);
+  var results = new MovieSearchResponse();
+  context.Response.ContentType = "application/json";
+  results.movies = response.Search;
+  return JsonSerializer.Serialize(results);
 });
 
-app.MapGet("/movies/{id}", async (HttpContext context, string id) => {
+app.MapGet("/api/movies/{id}", async (HttpContext context, string id) => {
   var response = await client.GetAsync($"http://www.omdbapi.com/?apikey={omdbApiKey}&i={id}");
-  context.Response.Headers["Content-Type"] = "application/json";
+  context.Response.ContentType = "application/json";
   if (response == null) {
     return "No movie found.";
   } else {
@@ -61,7 +67,8 @@ app.MapGet("/movies/{id}", async (HttpContext context, string id) => {
   }
 });
 
-app.MapGet("/reviews", async () => {
+app.MapGet("/api/reviews", async (HttpContext context) => {
+  context.Response.ContentType = "application/json";
   var results =
     from review in await db.MovieReview.ToListAsync()
     select review;

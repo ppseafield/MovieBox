@@ -1,11 +1,21 @@
 namespace MovieBox.OMDb;
 
-public record OmdbRating
+public class OmdbRating
 {
   public string Source = "";
   public string Value = "";
 }
-public record OmdbMovie
+
+public class OmdbMovie
+{
+  public string Title { get; set; } = "";
+  public string Year { get; set; } = "";
+  public string imdbID { get; set; } = "";
+  public string Type { get; set; } = "";
+  public string Poster { get; set; } = "";
+}
+
+public class OmdbMovieFull
 {
   public string Title = "";
   public string Year = "";
@@ -34,3 +44,10 @@ public record OmdbMovie
   public string? Response;
 }
 
+public class OmdbSearch
+{
+  public List<OmdbMovie> Search { get; set; } = [];
+  public string Response { get; set; } = "";
+  public string? Error { get; set; } = "";
+  public string totalResults { get; set; } = "";
+}
