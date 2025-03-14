@@ -4,6 +4,9 @@ using MovieBox.OMDb;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+
+await using var db = new MovieReviewContext();
 
 using HttpClient client = new HttpClient();
 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -58,8 +61,11 @@ app.MapGet("/movies/{id}", async (HttpContext context, string id) => {
   }
 });
 
-app.MapGet("/reviews", () => {
-  
+app.MapGet("/reviews", async () => {
+  var results =
+    from review in await db.MovieReview.ToListAsync()
+    select review;
+    return JsonSerializer.Serialize(results);
 });
 
 app.Run();
