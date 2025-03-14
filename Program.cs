@@ -38,12 +38,22 @@ if (string.IsNullOrEmpty(omdbApiKey)) {
 
 app.MapGet("/", () => "Hello World!");
 
-app.MapGet("/search", async (HttpContext context, string title) => {
+app.MapGet("/movies/search", async (HttpContext context, string title) => {
   var response = await client.GetAsync($"http://www.omdbapi.com/?apikey={omdbApiKey}&s={title}");
   if (response == null) {
     return "No movies found.";
   } else {
     context.Response.Headers["Content-Type"] = "application/json";
+    return await response.Content.ReadAsStringAsync();
+  }
+});
+
+app.MapGet("/movies/{id}", async (HttpContext context, string id) => {
+  var response = await client.GetAsync($"http://www.omdbapi.com/?apikey={omdbApiKey}&i={id}");
+  context.Response.Headers["Content-Type"] = "application/json";
+  if (response == null) {
+    return "No movie found.";
+  } else {
     return await response.Content.ReadAsStringAsync();
   }
 });

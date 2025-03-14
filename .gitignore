@@ -1,3 +1,4 @@
 .env
 project.nuget.cache
 obj/
+bin/
