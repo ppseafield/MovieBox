@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "vXg3HVxBypc=",
+  "success": true,
+  "projectFilePath": "/home/pps/Code/dotnet/MovieBox/MovieBoxDB/MovieBoxDB.sqlproj",
+  "expectedPackageFiles": [
+    "/home/pps/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.0/microsoft.netframework.referenceassemblies.1.0.0.nupkg.sha512",
+    "/home/pps/.nuget/packages/microsoft.netframework.referenceassemblies.net46/1.0.0/microsoft.netframework.referenceassemblies.net46.1.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

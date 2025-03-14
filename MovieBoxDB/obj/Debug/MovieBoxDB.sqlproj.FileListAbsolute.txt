@@ -1,0 +1,9 @@
+/home/pps/Code/dotnet/MovieBox/MovieBoxDB/bin/Debug/MovieBoxDB.dacpac
+/home/pps/Code/dotnet/MovieBox/MovieBoxDB/obj/Debug/MovieBoxDB.GeneratedMSBuildEditorConfig.editorconfig
+/home/pps/Code/dotnet/MovieBox/MovieBoxDB/obj/Debug/MovieBoxDB.sourcelink.json
+/home/pps/Code/dotnet/MovieBox/MovieBoxDB/obj/Debug/Model.xml
+/home/pps/Code/dotnet/MovieBox/MovieBoxDB/obj/Debug/refactor.xml
+/home/pps/Code/dotnet/MovieBox/MovieBoxDB/obj/Debug/postdeploy.sql
+/home/pps/Code/dotnet/MovieBox/MovieBoxDB/obj/Debug/predeploy.sql
+/home/pps/Code/dotnet/MovieBox/MovieBoxDB/obj/Debug/MovieBoxDB.dll
+/home/pps/Code/dotnet/MovieBox/MovieBoxDB/obj/Debug/MovieBoxDB.pdb
