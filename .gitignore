@@ -1,0 +1,3 @@
+.env
+project.nuget.cache
+obj/Debug/
